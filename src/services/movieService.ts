@@ -1,5 +1,4 @@
 import axios from "axios";
-import type { AxiosResponse } from "axios";
 import type { Movie } from "../types/movie";
 
 interface FetchMoviesParams {
@@ -14,12 +13,12 @@ interface FetchMoviesResponse {
 }
 
 export async function fetchMovies(
-  params: FetchMoviesParams,
-  token: string
+  params: FetchMoviesParams
 ): Promise<FetchMoviesResponse> {
   const { query } = params;
+  const token = import.meta.env.VITE_TMDB_TOKEN;
 
-  const response: AxiosResponse<FetchMoviesResponse> = await axios.get(
+  const response = await axios.get<FetchMoviesResponse>(
     "https://api.themoviedb.org/3/search/movie",
     {
       params: {
@@ -29,7 +28,7 @@ export async function fetchMovies(
         page: 1,
       },
       headers: {
-        Authorization: `Bearer ${token}`, // ✅ саме так
+        Authorization: `Bearer ${token}`,
       },
     }
   );
