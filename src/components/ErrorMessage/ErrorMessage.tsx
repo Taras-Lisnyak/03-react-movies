@@ -7,7 +7,7 @@ interface ErrorMessageProps {
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
     return (
-        <p className={css.text}>There was an error, please try again...</p>
+        <p className={styles.text}>{message || "There was an error, please try again..."} </p>
     );
 };
 
